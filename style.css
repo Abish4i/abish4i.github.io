@@ -354,11 +354,11 @@ label {
         top: 100%; /* Position right below the header */
         left: 0;
         width: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.9);
         backdrop-filter: blur(10px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         padding: 24px 28px;
-        gap: 24px;
+        gap: 20px;
         align-items: flex-start;
     }
 
@@ -391,7 +391,9 @@ label {
     }
 
     header .logo .lead {
-        display: none;
+        display: block;
+        font-size: 13px;
+        margin-top: 2px;
     }
 
     .avatar {
