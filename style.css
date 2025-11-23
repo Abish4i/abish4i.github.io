@@ -357,11 +357,18 @@ label {
         background-color: rgba(0, 0, 0, 0.5);
         backdrop-filter: blur(10px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 10px 0;
+        padding: 24px 28px;
+        gap: 24px;
+        align-items: flex-start;
     }
 
     .nav-links.active {
         display: flex;
+    }
+
+    .nav-links a {
+        margin-left: 0;
+        font-size: 18px;
     }
 
     .menu-icon {
