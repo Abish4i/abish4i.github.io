@@ -132,8 +132,8 @@ function parseModifiedCSV(csv) {
                 quotesData = parseModifiedCSV(csv);
                 showRandomQuote(); // Display a quote immediately after loading
 
-                // Refresh quote every 5 seconds
-                setInterval(showRandomQuote, 5000);
+                // Refresh quote every 8 seconds
+                setInterval(showRandomQuote, 8000);
 
                 // Add click listener to refresh quote
                 const quoteDisplay = document.getElementById('quoteDisplay');
