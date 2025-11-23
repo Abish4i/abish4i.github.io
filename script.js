@@ -99,8 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let quotesData = [];
 
 function parseModifiedCSV(csv) {
-    const lines = csv.trim().split('
-'); // Split by new line and trim
+    const lines = csv.trim().split('\n'); // Split by new line and trim
     const result = [];
 
     // Extract headers

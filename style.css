@@ -38,7 +38,9 @@ body {
     width: 100%;
     text-align: center;
     padding: 10px 0;
-    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: white;
     z-index: 1000;
 }
@@ -96,7 +98,9 @@ header {
     align-items: center;
     justify-content: space-between;
     gap: 18px;
-    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: fixed;
     top: 0;
     left: 0;
@@ -331,10 +335,13 @@ label {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 80px;
+        top: 100%; /* Position right below the header */
         left: 0;
         width: 100%;
-        background-color: #000;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 10px 0;
     }
 
     .nav-links.active {
