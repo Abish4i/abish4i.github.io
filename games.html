@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Game Center - Pixel Arcade" />
+    <meta name="author" content="Abhishek Sengar" />
+    <title>Abhishek Sengar — Game Center</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add specific styles for game modal here if needed to override or complement style.css */
+    </style>
+</head>
+
+<body class="resume">
+    <main class="wrap" role="main">
+        <div id="header-placeholder"></div>
+
+        <div class="card resume-page">
+            <div class="resume-header" style="justify-content: center; display: flex; align-items: center;">
+                <div class="resume-photo" style="position: static; margin-right: 20px;">
+                    <img src="https://inknowhere.wordpress.com/wp-content/uploads/2025/10/image-2_imresizer.jpg"
+                        alt="Abhishek" />
+                </div>
+                <div>
+                    <h1 style="margin:0;">Abhishek Sengar</h1>
+                    <p style="margin:0; color: var(--muted);">Game Arcade</p>
+                </div>
+            </div>
+
+            <div class="dialer-container">
+                <div class="dialer-screen" id="status-screen">SELECT GAME</div>
+
+                <div class="dialer-grid">
+                    <button class="dialer-btn" onclick="openGame('tictactoe')">
+                        <span class="dialer-icon">❌</span>
+                        <span class="dialer-label">Tic Tac</span>
+                    </button>
+
+                    <button class="dialer-btn" onclick="openGame('snake')">
+                        <span class="dialer-icon">🐍</span>
+                        <span class="dialer-label">Snake</span>
+                    </button>
+
+                    <button class="dialer-btn" onclick="openGame('game2048')">
+                        <span class="dialer-icon">🔢</span>
+                        <span class="dialer-label">2048</span>
+                    </button>
+
+                    <button class="dialer-btn" onclick="window.open('https://chromedino.com/', '_blank')">
+                        <span class="dialer-icon">🦖</span>
+                        <span class="dialer-label">Dino</span>
+                    </button>
+
+                    <button class="dialer-btn" onclick="window.open('https://pong-2.com/', '_blank')">
+                        <span class="dialer-icon">🏓</span>
+                        <span class="dialer-label">Pong</span>
+                    </button>
+
+                    <button class="dialer-btn" style="background: var(--card); color: var(--accent); border: 1px solid var(--accent);" onclick="resetAll()">
+                        <span class="dialer-icon">🏠</span>
+                    </button>
+
+                    <button class="dialer-btn" onclick="window.open('https://freeinvaders.org/', '_blank')">
+                        <span class="dialer-icon">👾</span>
+                        <span class="dialer-label">Space</span>
+                    </button>
+
+                    <button class="dialer-btn" onclick="window.open('https://lichess.org/', '_blank')">
+                        <span class="dialer-icon">♟️</span>
+                        <span class="dialer-label">Chess</span>
+                    </button>
+
+                    <button class="dialer-btn" onclick="window.open('https://poki.com/en/air-hockey', '_blank')">
+                        <span class="dialer-icon">🏒</span>
+                        <span class="dialer-label">Hockey</span>
+                    </button>
+
+                    <button class="dialer-btn" onclick="window.open('https://braindots.translimit.co.jp/en/', '_blank')">
+                        <span class="dialer-icon">🧠</span>
+                        <span class="dialer-label">Brain</span>
+                    </button>
+
+                </div>
+
+                <!-- Game Modals -->
+
+                <!-- Tic Tac Toe -->
+                <div id="tictactoe-area" class="game-modal">
+                    <h3>Tic-Tac-Toe</h3>
+                    <div id="board" class="tictac-board">
+                        <div class="cell" onclick="makeMove(0)"></div>
+                        <div class="cell" onclick="makeMove(1)"></div>
+                        <div class="cell" onclick="makeMove(2)"></div>
+                        <div class="cell" onclick="makeMove(3)"></div>
+                        <div class="cell" onclick="makeMove(4)"></div>
+                        <div class="cell" onclick="makeMove(5)"></div>
+                        <div class="cell" onclick="makeMove(6)"></div>
+                        <div class="cell" onclick="makeMove(7)"></div>
+                        <div class="cell" onclick="makeMove(8)"></div>
+                    </div>
+                    <p id="winner-msg" style="min-height: 24px;"></p>
+                    <button class="btn" onclick="resetAll()">Exit Game</button>
+                </div>
+
+                <!-- Snake -->
+                <div id="snake-area" class="game-modal">
+                    <h3>Snake</h3>
+                    <p class="muted">Use Arrow Keys to Move</p>
+                    <canvas id="snake-canvas" width="300" height="300" style="border: 1px solid var(--accent); background: #000;"></canvas>
+                    <div style="margin-top: 10px;">
+                        <button class="btn" onclick="resetAll()">Exit Game</button>
+                    </div>
+                </div>
+
+                <!-- 2048 -->
+                <div id="area-2048" class="game-modal">
+                    <h3>2048</h3>
+                    <p class="muted">Join the numbers to get to 2048!</p>
+                    <div id="game-2048-board"></div>
+                    <div style="margin-top: 10px;">
+                        <button class="btn" onclick="resetAll()">Exit Game</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="footer-placeholder"></div>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="games.js"></script>
+</body>
+</html>
