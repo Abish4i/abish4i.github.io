@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Game Center - Pixel Arcade" />
+    <meta name="author" content="Abhishek Sengar" />
+    <title>Abhishek Sengar — Game Center</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add specific styles for game modal here if needed to override or complement style.css */
+    </style>
+</head>
+
+<body class="resume">
+    <main class="wrap" role="main">
+        <div id="header-placeholder"></div>
+
+        <div class="card resume-page">
+            <!-- Header removed as per request -->
+
+            <div class="dialer-container">
+                <div class="dialer-screen" id="status-screen">SELECT GAME</div>
+
+                <div id="arc-carousel-container" class="carousel-container">
+                    <!-- Carousel items will be injected by games.js -->
+                </div>
+
+                <!-- Game Modals -->
+
+                <!-- Tic Tac Toe -->
+                <div id="tictactoe-area" class="game-modal">
+                    <h3>Tic-Tac-Toe</h3>
+                    <div id="board" class="tictac-board">
+                        <div class="cell" onclick="makeMove(0)"></div>
+                        <div class="cell" onclick="makeMove(1)"></div>
+                        <div class="cell" onclick="makeMove(2)"></div>
+                        <div class="cell" onclick="makeMove(3)"></div>
+                        <div class="cell" onclick="makeMove(4)"></div>
+                        <div class="cell" onclick="makeMove(5)"></div>
+                        <div class="cell" onclick="makeMove(6)"></div>
+                        <div class="cell" onclick="makeMove(7)"></div>
+                        <div class="cell" onclick="makeMove(8)"></div>
+                    </div>
+                    <p id="winner-msg" style="min-height: 24px;"></p>
+                    <button class="btn" onclick="resetAll()">Exit Game</button>
+                </div>
+
+                <!-- Snake -->
+                <div id="snake-area" class="game-modal">
+                    <h3>Snake</h3>
+                    <p class="muted">Use Arrow Keys to Move</p>
+                    <canvas id="snake-canvas" width="300" height="300" style="border: 1px solid var(--accent); background: #000;"></canvas>
+                    <div style="margin-top: 10px;">
+                        <button class="btn" onclick="resetAll()">Exit Game</button>
+                    </div>
+                </div>
+
+                <!-- 2048 -->
+                <div id="area-2048" class="game-modal">
+                    <h3>2048</h3>
+                    <p class="muted">Join the numbers to get to 2048!</p>
+                    <div id="game-2048-board"></div>
+                    <div style="margin-top: 10px;">
+                        <button class="btn" onclick="resetAll()">Exit Game</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="footer-placeholder"></div>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="games.js"></script>
+</body>
+</html>

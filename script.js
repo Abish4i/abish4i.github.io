@@ -79,7 +79,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const shuffledCategories = categories.sort(() => 0.5 - Math.random());
             const selectedCategories = shuffledCategories.slice(0, 3);
             const newSubtitle = selectedCategories.map(category => getRandomWord(category)).join(', ');
-            subtitleElement.textContent = newSubtitle;
+
+            // Easter Egg Logic
+            if (selectedCategories.includes('X-Gaming-Genres')) {
+                subtitleElement.innerHTML = `<a href="games.html" style="text-decoration:none; color:inherit; cursor:default;">${newSubtitle}</a>`;
+            } else {
+                subtitleElement.textContent = newSubtitle;
+            }
+
             subtitleElement.className = 'lead ' + selectedCategories.join(' ');
         }
     }
