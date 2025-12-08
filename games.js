@@ -1,19 +1,134 @@
 
-// --- DIALER SYSTEM ---
+// --- GAME LIST CONFIGURATION ---
+const gamesList = [
+    { id: 'tictactoe', label: 'Tic Tac', icon: '❌', type: 'internal' },
+    { id: 'snake', label: 'Snake', icon: '🐍', type: 'internal' },
+    { id: 'game2048', label: '2048', icon: '🔢', type: 'internal' },
+    { id: 'dino', label: 'Dino', icon: '🦖', type: 'link', url: 'https://chromedino.com/' },
+    { id: 'pong', label: 'Pong', icon: '🏓', type: 'link', url: 'https://pong-2.com/' },
+    { id: 'home', label: 'Home', icon: '🏠', type: 'reset' },
+    { id: 'space', label: 'Space', icon: '👾', type: 'link', url: 'https://freeinvaders.org/' },
+    { id: 'chess', label: 'Chess', icon: '♟️', type: 'link', url: 'https://lichess.org/' },
+    { id: 'hockey', label: 'Hockey', icon: '🏒', type: 'link', url: 'https://poki.com/en/air-hockey' },
+    { id: 'brain', label: 'Brain', icon: '🧠', type: 'link', url: 'https://braindots.translimit.co.jp/en/' }
+];
+
+// --- CAROUSEL LOGIC ---
+let activeIndex = 0; // The item at the top center
+const radius = 120; // Radius of the arc
+const carouselContainer = document.getElementById('arc-carousel-container');
 const screen = document.getElementById('status-screen');
 const gameModals = document.querySelectorAll('.game-modal');
 
-// Game State References (to stop loops)
+// Game State References
 let snakeInterval = null;
+
+function initCarousel() {
+    renderCarousel();
+}
+
+function renderCarousel() {
+    carouselContainer.innerHTML = '';
+    const total = gamesList.length;
+
+    // We want the active item at -90 degrees (top) or 90 (bottom)?
+    // User requested "Visible all around arc". A circle is best.
+    // Let's position them in a full circle. Top is -90deg.
+
+    // Angle per item
+    const angleStep = 360 / total;
+
+    gamesList.forEach((game, index) => {
+        const item = document.createElement('div');
+        item.className = 'carousel-item';
+        if (index === activeIndex) item.classList.add('active');
+
+        item.innerHTML = `
+            <span class="carousel-icon">${game.icon}</span>
+            <span class="carousel-label">${game.label}</span>
+        `;
+
+        // Calculate Angle relative to active index
+        // We want activeIndex to be at -90deg (Top)
+        // offset = (index - activeIndex) * angleStep
+        let theta = (index - activeIndex) * angleStep - 90;
+
+        // Convert to radians
+        let rad = theta * (Math.PI / 180);
+
+        // Position
+        // Center of container is 150, 150 (if width/height is 300)
+        // but we position relative to center of item (30,30)
+        // so translate(x, y)
+        // x = r * cos(rad)
+        // y = r * sin(rad)
+
+        let x = radius * Math.cos(rad);
+        let y = radius * Math.sin(rad);
+
+        // Apply transform
+        // Active item gets scale 1.5, others smaller
+        // Distance from 'top' (-90deg) determines scale
+
+        // Simpler approach: Determine "distance" in indices from active
+        let dist = Math.abs(index - activeIndex);
+        if (dist > total / 2) dist = total - dist; // wrap around distance
+
+        let scale = dist === 0 ? 1.5 : Math.max(0.6, 1 - (dist * 0.15));
+
+        item.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+
+        // Z-index: active on top
+        item.style.zIndex = dist === 0 ? 100 : 10 - dist;
+
+        // Events
+        item.onclick = () => {
+            if (index === activeIndex) {
+                // Launch Game
+                handleGameLaunch(game);
+            } else {
+                // Rotate to this item
+                rotateCarousel(index);
+            }
+        };
+
+        carouselContainer.appendChild(item);
+    });
+}
+
+function rotateCarousel(newIndex) {
+    activeIndex = newIndex;
+    renderCarousel();
+
+    // Update screen text with selection
+    const game = gamesList[activeIndex];
+    screen.innerText = "Selected: " + game.label;
+}
+
+function handleGameLaunch(game) {
+    hideAllGames();
+
+    if (game.type === 'internal') {
+        openGame(game.id);
+    } else if (game.type === 'link') {
+        screen.innerText = "Opening " + game.label + "...";
+        window.open(game.url, '_blank');
+        setTimeout(() => screen.innerText = "SELECT GAME", 2000);
+    } else if (game.type === 'reset') {
+        resetAll();
+    }
+}
+
+// --- EXISTING GAME LOGIC ---
 
 function hideAllGames() {
     gameModals.forEach(modal => modal.style.display = 'none');
-    // Stop games if running
     stopSnake();
+    // Stop 2048 listener if we want (logic is safe though)
 }
 
 function updateScreen(msg) {
-    hideAllGames();
+    // Only used by internal logic now
     screen.innerText = msg;
 }
 
@@ -22,24 +137,33 @@ function resetAll() {
     screen.innerText = "SELECT GAME";
     resetTicTacToe();
     stopSnake();
-    // Reset others as implemented
+
+    // Reset carousel to Home or just keep current
+    // activeIndex = gamesList.findIndex(g => g.id === 'home');
+    renderCarousel();
 }
 
-function openGame(gameName) {
-    hideAllGames();
-    if(gameName === 'tictactoe') {
+function openGame(gameId) {
+    // hideAllGames() called by handleGameLaunch already
+    if(gameId === 'tictactoe') {
         screen.innerText = "Playing: Tic Tac Toe";
         document.getElementById('tictactoe-area').style.display = 'block';
-    } else if (gameName === 'snake') {
+    } else if (gameId === 'snake') {
         screen.innerText = "Playing: Snake";
         document.getElementById('snake-area').style.display = 'block';
         initSnake();
-    } else if (gameName === 'game2048') {
+    } else if (gameId === 'game2048') {
         screen.innerText = "Playing: 2048";
         document.getElementById('area-2048').style.display = 'block';
         init2048();
     }
 }
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    initCarousel();
+});
+
 
 // --- TIC TAC TOE ---
 let tttPlayer = 'X';

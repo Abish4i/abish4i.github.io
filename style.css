@@ -652,3 +652,60 @@ a.card {
 .tile-512 { background: #edc850; color: #f9f6f2; font-size: 16px; }
 .tile-1024 { background: #edc53f; color: #f9f6f2; font-size: 14px; }
 .tile-2048-val { background: #edc22e; color: #f9f6f2; font-size: 14px; }
+
+/* ARC CAROUSEL CSS */
+.carousel-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    /* overflow: hidden; Removed to allow items to be seen if they rotate out slightly */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-item {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--glass);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    color: #fff;
+    z-index: 10;
+}
+
+.carousel-item.active {
+    background: rgba(0, 217, 255, 0.2);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+    z-index: 20;
+}
+
+.carousel-icon {
+    font-size: 24px;
+    margin-bottom: 2px;
+}
+
+.carousel-label {
+    font-size: 8px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: bold;
+}
+
+.carousel-item.active .carousel-label {
+    color: var(--accent);
+}
+
+.carousel-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}

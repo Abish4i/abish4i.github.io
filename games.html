@@ -20,70 +20,13 @@
         <div id="header-placeholder"></div>
 
         <div class="card resume-page">
-            <div class="resume-header" style="justify-content: center; display: flex; align-items: center;">
-                <div class="resume-photo" style="position: static; margin-right: 20px;">
-                    <img src="https://inknowhere.wordpress.com/wp-content/uploads/2025/10/image-2_imresizer.jpg"
-                        alt="Abhishek" />
-                </div>
-                <div>
-                    <h1 style="margin:0;">Abhishek Sengar</h1>
-                    <p style="margin:0; color: var(--muted);">Game Arcade</p>
-                </div>
-            </div>
+            <!-- Header removed as per request -->
 
             <div class="dialer-container">
                 <div class="dialer-screen" id="status-screen">SELECT GAME</div>
 
-                <div class="dialer-grid">
-                    <button class="dialer-btn" onclick="openGame('tictactoe')">
-                        <span class="dialer-icon">❌</span>
-                        <span class="dialer-label">Tic Tac</span>
-                    </button>
-
-                    <button class="dialer-btn" onclick="openGame('snake')">
-                        <span class="dialer-icon">🐍</span>
-                        <span class="dialer-label">Snake</span>
-                    </button>
-
-                    <button class="dialer-btn" onclick="openGame('game2048')">
-                        <span class="dialer-icon">🔢</span>
-                        <span class="dialer-label">2048</span>
-                    </button>
-
-                    <button class="dialer-btn" onclick="window.open('https://chromedino.com/', '_blank')">
-                        <span class="dialer-icon">🦖</span>
-                        <span class="dialer-label">Dino</span>
-                    </button>
-
-                    <button class="dialer-btn" onclick="window.open('https://pong-2.com/', '_blank')">
-                        <span class="dialer-icon">🏓</span>
-                        <span class="dialer-label">Pong</span>
-                    </button>
-
-                    <button class="dialer-btn" style="background: var(--card); color: var(--accent); border: 1px solid var(--accent);" onclick="resetAll()">
-                        <span class="dialer-icon">🏠</span>
-                    </button>
-
-                    <button class="dialer-btn" onclick="window.open('https://freeinvaders.org/', '_blank')">
-                        <span class="dialer-icon">👾</span>
-                        <span class="dialer-label">Space</span>
-                    </button>
-
-                    <button class="dialer-btn" onclick="window.open('https://lichess.org/', '_blank')">
-                        <span class="dialer-icon">♟️</span>
-                        <span class="dialer-label">Chess</span>
-                    </button>
-
-                    <button class="dialer-btn" onclick="window.open('https://poki.com/en/air-hockey', '_blank')">
-                        <span class="dialer-icon">🏒</span>
-                        <span class="dialer-label">Hockey</span>
-                    </button>
-
-                    <button class="dialer-btn" onclick="window.open('https://braindots.translimit.co.jp/en/', '_blank')">
-                        <span class="dialer-icon">🧠</span>
-                        <span class="dialer-label">Brain</span>
-                    </button>
-
+                <div id="arc-carousel-container" class="carousel-container">
+                    <!-- Carousel items will be injected by games.js -->
                 </div>
 
                 <!-- Game Modals -->
