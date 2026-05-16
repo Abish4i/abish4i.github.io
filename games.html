@@ -69,6 +69,22 @@
                     </div>
                 </div>
 
+                <!-- Facts Quiz -->
+                <div id="quiz-area" class="game-modal">
+                    <h3>Tech & Finance Quiz</h3>
+                    <div id="quiz-container" style="text-align: left; margin: 15px 0;">
+                        <p id="quiz-question" style="font-weight: bold; margin-bottom: 10px;">Loading question...</p>
+                        <div id="quiz-options" style="display: flex; flex-direction: column; gap: 8px;">
+                            <!-- Options injected here -->
+                        </div>
+                    </div>
+                    <p id="quiz-msg" style="min-height: 24px; color: var(--accent); font-weight: bold;"></p>
+                    <div style="margin-top: 10px; display: flex; justify-content: space-between;">
+                        <button class="btn secondary" id="quiz-next-btn" onclick="nextQuizQuestion()" style="display: none;">Next</button>
+                        <button class="btn" onclick="resetAll()">Exit Game</button>
+                    </div>
+                </div>
+
             </div>
         </div>
 

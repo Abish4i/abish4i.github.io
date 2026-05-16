@@ -4,6 +4,7 @@ const gamesList = [
     { id: 'tictactoe', label: 'Tic Tac', icon: '❌', type: 'internal' },
     { id: 'snake', label: 'Snake', icon: '🐍', type: 'internal' },
     { id: 'game2048', label: '2048', icon: '🔢', type: 'internal' },
+    { id: 'quiz', label: 'Quiz', icon: '❓', type: 'internal' },
     { id: 'dino', label: 'Dino', icon: '🦖', type: 'link', url: 'https://chromedino.com/' },
     { id: 'pong', label: 'Pong', icon: '🏓', type: 'link', url: 'https://pong-2.com/' },
     { id: 'home', label: 'Home', icon: '🏠', type: 'reset' },
@@ -156,6 +157,9 @@ function openGame(gameId) {
         screen.innerText = "Playing: 2048";
         document.getElementById('area-2048').style.display = 'block';
         init2048();
+    } else if(gameId === 'quiz') {
+        document.getElementById('quiz-area').style.display = 'block';
+        initQuiz();
     }
 }
 
@@ -179,6 +183,7 @@ function makeMove(index) {
     tttCells[index].innerText = tttPlayer;
     tttCells[index].classList.add('taken');
     tttCells[index].style.color = tttPlayer === 'X' ? '#00D9FF' : '#FF0055'; // Theme colors
+    tttCells[index].style.textShadow = `0 0 10px ${tttPlayer === 'X' ? '#00D9FF' : '#FF0055'}`;
 
     checkTTTWin();
 
@@ -226,6 +231,8 @@ function resetTicTacToe() {
         cell.innerText = "";
         cell.classList.remove('taken');
         cell.style.color = '';
+        cell.style.textShadow = 'none';
+        cell.style.boxShadow = 'none';
     });
 }
 
@@ -275,11 +282,13 @@ function gameSnake() {
     if(playerY > tileCount - 1) playerY = 0;
 
     // Background
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
     ctx.fillRect(0, 0, snakeCanvas.width, snakeCanvas.height);
 
     // Snake
     ctx.fillStyle = '#00D9FF'; // Accent color
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = '#00D9FF';
     for(let i=0; i<trail.length; i++) {
         ctx.fillRect(trail[i].x * gridSize, trail[i].y * gridSize, gridSize - 2, gridSize - 2);
 
@@ -541,4 +550,123 @@ function checkForGameOver() {
             screen.innerText = "2048 GAME OVER!";
         }
     }
+}
+
+// --- QUIZ GAME ---
+const quizQuestions = [
+    {
+        q: "What does 'HTML' stand for?",
+        opts: ["Hyper Text Markup Language", "High Tech Modern Language", "Hyperlink Text Machine Language", "Home Tool Markup Language"],
+        ans: 0
+    },
+    {
+        q: "What is the primary function of a 'Bear Market'?",
+        opts: ["A market where stock prices are rising", "A market where stock prices are falling", "A market only for agricultural products", "A market with no price changes"],
+        ans: 1
+    },
+    {
+        q: "In computing, what does 'RAM' stand for?",
+        opts: ["Read Access Memory", "Random Authorized Memory", "Random Access Memory", "Read Authorized Machine"],
+        ans: 2
+    },
+    {
+        q: "Which of the following is considered a 'cryptocurrency'?",
+        opts: ["Euro", "Gold", "Bitcoin", "Bond"],
+        ans: 2
+    },
+    {
+        q: "What does an IPO stand for in finance?",
+        opts: ["Internal Profit Objective", "Initial Public Offering", "International Price Output", "Internet Protocol Option"],
+        ans: 1
+    },
+    {
+        q: "Which programming language is often used for data analysis and machine learning?",
+        opts: ["Java", "C++", "Python", "Swift"],
+        ans: 2
+    },
+    {
+        q: "What is a 'Dividend'?",
+        opts: ["A tax paid by corporations", "A distribution of a portion of a company's earnings to its shareholders", "The cost of buying a stock", "A type of bank loan"],
+        ans: 1
+    },
+    {
+        q: "What does API stand for?",
+        opts: ["Automated Program Interface", "Application Programming Interface", "Applied Protocol Information", "Advanced Process Integration"],
+        ans: 1
+    }
+];
+
+let currentQuizIndex = 0;
+let quizScore = 0;
+
+function initQuiz() {
+    currentQuizIndex = 0;
+    quizScore = 0;
+    document.getElementById('quiz-msg').innerText = '';
+    document.getElementById('quiz-next-btn').style.display = 'none';
+    loadQuizQuestion();
+}
+
+function loadQuizQuestion() {
+    if (currentQuizIndex >= quizQuestions.length) {
+        document.getElementById('quiz-question').innerText = `Quiz Complete! You scored ${quizScore} out of ${quizQuestions.length}.`;
+        document.getElementById('quiz-options').innerHTML = '';
+        document.getElementById('quiz-msg').innerText = '';
+        document.getElementById('quiz-next-btn').style.display = 'none';
+        screen.innerText = `SCORE: ${quizScore}/${quizQuestions.length}`;
+        return;
+    }
+
+    const qData = quizQuestions[currentQuizIndex];
+    document.getElementById('quiz-question').innerText = `${currentQuizIndex + 1}. ${qData.q}`;
+    screen.innerText = `QUIZ Q${currentQuizIndex + 1}/${quizQuestions.length}`;
+
+    const optsDiv = document.getElementById('quiz-options');
+    optsDiv.innerHTML = '';
+
+    qData.opts.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'btn secondary';
+        btn.style.width = '100%';
+        btn.style.textAlign = 'left';
+        btn.innerText = opt;
+        btn.onclick = () => checkQuizAnswer(index, btn);
+        optsDiv.appendChild(btn);
+    });
+}
+
+function checkQuizAnswer(selectedIndex, btnElement) {
+    const qData = quizQuestions[currentQuizIndex];
+    const optsDiv = document.getElementById('quiz-options');
+    const buttons = optsDiv.querySelectorAll('button');
+
+    buttons.forEach(btn => {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+    });
+
+    if (selectedIndex === qData.ans) {
+        btnElement.style.backgroundColor = 'rgba(0, 255, 0, 0.2)';
+        btnElement.style.border = '1px solid #00ff00';
+        document.getElementById('quiz-msg').innerText = 'Correct!';
+        document.getElementById('quiz-msg').style.color = '#00ff00';
+        quizScore++;
+    } else {
+        btnElement.style.backgroundColor = 'rgba(255, 0, 0, 0.2)';
+        btnElement.style.border = '1px solid #ff0000';
+        buttons[qData.ans].style.backgroundColor = 'rgba(0, 255, 0, 0.2)';
+        buttons[qData.ans].style.border = '1px solid #00ff00';
+        buttons[qData.ans].style.opacity = '1';
+        document.getElementById('quiz-msg').innerText = 'Incorrect!';
+        document.getElementById('quiz-msg').style.color = '#ff0000';
+    }
+
+    document.getElementById('quiz-next-btn').style.display = 'inline-block';
+}
+
+function nextQuizQuestion() {
+    currentQuizIndex++;
+    document.getElementById('quiz-msg').innerText = '';
+    document.getElementById('quiz-next-btn').style.display = 'none';
+    loadQuizQuestion();
 }
