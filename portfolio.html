@@ -61,7 +61,7 @@
               <p>${escapeHtml(repo.description || repo.language || '')}</p>
             </div>
             <div class="buttons" style="margin-top: 1rem;">
-              <a class="btn" href="${repo.html_url}" target="_blank" rel="noopener">View Project</a>
+              <a class="btn" href="${escapeHtml(String(repo.html_url).startsWith('https://') ? repo.html_url : '#')}" target="_blank" rel="noopener">View Project</a>
             </div>
           `;
                     container.appendChild(el);
