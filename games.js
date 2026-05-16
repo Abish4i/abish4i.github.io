@@ -311,17 +311,25 @@ function gameSnake() {
 function keyPush(evt) {
     if(document.getElementById('snake-area').style.display !== 'block') return;
 
-    switch(evt.keyCode) {
-        case 37: // Left
+    switch(evt.key) {
+        case 'ArrowLeft':
+        case 'a':
+        case 'A': // Left
             if(velocityX !== 1) { velocityX = -1; velocityY = 0; }
             break;
-        case 38: // Up
+        case 'ArrowUp':
+        case 'w':
+        case 'W': // Up
             if(velocityY !== 1) { velocityX = 0; velocityY = -1; }
             break;
-        case 39: // Right
+        case 'ArrowRight':
+        case 'd':
+        case 'D': // Right
             if(velocityX !== -1) { velocityX = 1; velocityY = 0; }
             break;
-        case 40: // Down
+        case 'ArrowDown':
+        case 's':
+        case 'S': // Down
             if(velocityY !== -1) { velocityX = 0; velocityY = 1; }
             break;
     }
@@ -379,10 +387,10 @@ function control2048(e) {
     if(document.getElementById('area-2048').style.display !== 'block') return;
 
     let moved = false;
-    if(e.keyCode === 39) moved = moveRight();
-    else if(e.keyCode === 37) moved = moveLeft();
-    else if(e.keyCode === 38) moved = moveUp();
-    else if(e.keyCode === 40) moved = moveDown();
+    if(e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moved = moveRight();
+    else if(e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moved = moveLeft();
+    else if(e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') moved = moveUp();
+    else if(e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') moved = moveDown();
 
     if(moved) {
         generateTile();
