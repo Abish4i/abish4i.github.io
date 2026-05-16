@@ -127,11 +127,6 @@ function hideAllGames() {
     // Stop 2048 listener if we want (logic is safe though)
 }
 
-function updateScreen(msg) {
-    // Only used by internal logic now
-    screen.innerText = msg;
-}
-
 function resetAll() {
     hideAllGames();
     screen.innerText = "SELECT GAME";
