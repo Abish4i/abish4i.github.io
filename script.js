@@ -71,10 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return words[Math.floor(Math.random() * words.length)];
     }    
 
+    const categories = Object.keys(wordCategories);
+
     function updateSubtitle() {
         const subtitleElement = document.querySelector('.lead');
         if (subtitleElement) {
-            const categories = Object.keys(wordCategories);
             // Shuffle categories to get a random mix
             const shuffledCategories = categories.sort(() => 0.5 - Math.random());
             const selectedCategories = shuffledCategories.slice(0, 3);
