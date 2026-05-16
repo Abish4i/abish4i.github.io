@@ -1,6 +1,6 @@
 :root {
     --bg: #0f1724;
-    --card: #0a0a0a;
+    --card: rgba(10, 10, 10, 0.4);
     --muted: #A0A0A0;
     --accent: #00D9FF;
     --glass: rgba(255, 255, 255, 0.03);
@@ -41,7 +41,7 @@ body {
     text-align: center;
     padding: 10px 0;
     background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(16px);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: white;
     z-index: 1000;
@@ -101,7 +101,7 @@ header {
     justify-content: space-between;
     gap: 18px;
     background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: fixed;
     top: 0;
@@ -170,7 +170,8 @@ p.lead {
     border-radius: var(--radius);
     padding: 24px;
     box-shadow: 0 6px 20px rgba(2, 6, 23, 0.5);
-    border: 1px solid #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -232,7 +233,8 @@ p.lead {
     border-radius: var(--radius);
     padding: 18px;
     box-shadow: 0 6px 20px rgba(2, 6, 23, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -287,7 +289,8 @@ textarea {
     width: 100%;
     padding: 10px 12px;
     border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
     background: transparent;
     color: inherit;
     font-size: 14px;
@@ -355,7 +358,7 @@ label {
         left: 0;
         width: 100%;
         background-color: rgba(0, 0, 0, 0.9);
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(16px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         padding: 24px 28px;
         gap: 20px;
